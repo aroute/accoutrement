@@ -155,7 +155,8 @@ You must wait few minutes here.
 source ./refresh-token
 ```
 ```bash
-curl -X POST "https://api.openshift.com/api/assisted-install/v2/clusters/${CLUSTER_ID}/actions/install" \
+curl -X POST \
+"https://api.openshift.com/api/assisted-install/v2/clusters/${CLUSTER_ID}/actions/install" \
 -H "Authorization: Bearer ${API_TOKEN}"
 ```
 
