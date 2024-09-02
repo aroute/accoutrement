@@ -101,7 +101,7 @@ CLUSTER_ID=$(echo $RESPONSE | jq -r \
 '.cluster_networks[0].cluster_id') ; echo $CLUSTER_ID
 ```
 
-3. Get Cluster Status
+3. Get Instance Status.
 ```bash
 STATUS=$(curl -s -X GET \
 "https://api.openshift.com/api/assisted-install/v2/clusters/${CLUSTER_ID}" \
@@ -109,7 +109,7 @@ STATUS=$(curl -s -X GET \
   -H "Authorization: Bearer $API_TOKEN") ; echo $STATUS
 ```
 
-4. Create Infra Env
+4. Create Infrastructure environment.
 ```bash
 export INFRA_ENV_ID=$(curl -s -X POST \
 "https://api.openshift.com/api/assisted-install/v2/infra-envs" \
@@ -125,12 +125,12 @@ export INFRA_ENV_ID=$(curl -s -X POST \
 }') ; echo $INFRA_ENV_ID
 ```
 
-5. Get ISO URL
+5. Get ISO URL.
 ```bash
 ISO_URL=$(echo $INFRA_ENV_ID | jq -r '.download_url')
 ```
 
-6. Download ISO
+6. Download ISO file.
 ```bash
 wget -O ~/Downloads/${NAME}.iso $ISO_URL
 ```
@@ -144,7 +144,7 @@ wget -O ~/Downloads/${NAME}.iso $ISO_URL
 
 :::warning
 
-You must wait few minutes here.
+You must wait at least two minutes here before proceeding forward. Check your clock.
 
 :::
 
@@ -160,7 +160,7 @@ curl -X POST \
 -H "Authorization: Bearer ${API_TOKEN}"
 ```
 
-2. Get Status
+2. Get Status using the while loop.
 ```bash
 while [ "$STATUS" != "installed" ]; do
     STATUS=$(curl -s -X GET "https://api.openshift.com/api/assisted-install/v2/clusters/${CLUSTER_ID}" \
@@ -230,17 +230,17 @@ curl -s -X GET \
 
 #### 2.2.1 Setup MAS CLI
 
-5. Change directory
+5. Change directory.
 ```bash
 cd mas9
 ```
 
-6. Start MAS CLI
+6. Start MAS CLI container.
 ```bash
 podman run -it --pull always -v ${PWD}:/mas9:Z --name ibmmas quay.io/ibmmas/cli:10.9.1
 ```
 
-7. Change directory
+7. Change directory.
 ```bash
 cd /mas9
 ```
@@ -254,14 +254,14 @@ cp /mascli/ansible-devops/common_vars/default_storage_classes.yml /mascli/ansibl
 
 9. Copy/paste the `oc login ...` string from your passwords.txt file to login to your OpenShift from inside the MASCLI container.
 
-### 2.4 LVM Storage
+### 2.4 LVM Storage operator
 
-10. Install LVM operator for OpenShift
+10. Install LVM operator for OpenShift.
 ```bash
 ./install_lvm_storage.sh
 ```
 
-### 2.5 Registry (LVM)
+### 2.5 Container image registry server
 
 11. Install registry server.
 ```bash
