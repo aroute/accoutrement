@@ -11,7 +11,7 @@ slug: /
 
 #### 1.1.1 API token
 
-1. Change directory.
+1. Open Terminal. Change directory.
 ```bash
 cd 1261
 ```
@@ -62,14 +62,16 @@ SSH_KEY=$(cat ~/.ssh/id_ed25519.pub)
 
 #### 1.1.4 Name your OpenShift
 
-6. Save your assigned name as a variable. Replace XX with your number before executing the command.
+6. Locate your assigned workstation name from the passwords.txt file on the desktop.
+
+7. Save your assigned name as a variable. Replace XX with your number before executing the command.
 ```bash
 export NAME=ocpwksXX
 ```
 
 #### 1.1.5 OpenShift version
 
-7.	At the time of this workshop, we are working with version 4.15. Save it as a variable.
+8.	At the time of this workshop, we are working with version 4.15. Save it as a variable.
 ```bash
 export VERSION=4.15
 ```
@@ -95,7 +97,8 @@ RESPONSE=$(curl -s -X POST "https://api.openshift.com/api/assisted-install/v2/cl
 
 2. Identify the clusterID.
 ```bash
-CLUSTER_ID=$(echo $RESPONSE | jq -r '.cluster_networks[0].cluster_id') ; echo $CLUSTER_ID
+CLUSTER_ID=$(echo $RESPONSE | jq -r \
+'.cluster_networks[0].cluster_id') ; echo $CLUSTER_ID
 ```
 
 3. Get Cluster Status
@@ -190,9 +193,9 @@ The while loop times out when the token expires. Take the following actions when
 
 :::info
 
-While we wait for the Openshift to finish the installation, we switch gears and work on Maximo customization and Maximo database migration. We will come back to OpenShift after the installation has been completed successfully.
+While we wait for OpenShift to finish the installation, we'll switch gears and work on Maximo customization and database migration. We'll return to OpenShift after the installation is successfully completed.
 
-Jump down below to section number 3.
+For now, jump down below to section number 3.
 
 :::
 
@@ -260,11 +263,11 @@ cp /mascli/ansible-devops/common_vars/default_storage_classes.yml /mascli/ansibl
 
 ## 3 Maximo 7.x customization
 
-### 3.1 Instructor-led.
+1. Instructor-led session.
 
 ## 4 Maximo 7.x database migration
 
-### 4.1 Instructor-led.
+2. Instructor-led session.
 
 :::info
 
