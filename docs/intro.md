@@ -103,14 +103,16 @@ CLUSTER_ID=$(echo $RESPONSE | jq -r \
 
 3. Get Cluster Status
 ```bash
-STATUS=$(curl -s -X GET "https://api.openshift.com/api/assisted-install/v2/clusters/${CLUSTER_ID}" \
+STATUS=$(curl -s -X GET \
+"https://api.openshift.com/api/assisted-install/v2/clusters/${CLUSTER_ID}" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $API_TOKEN") ; echo $STATUS
 ```
 
 4. Create Infra Env
 ```bash
-export INFRA_ENV_ID=$(curl -s -X POST "https://api.openshift.com/api/assisted-install/v2/infra-envs" \
+export INFRA_ENV_ID=$(curl -s -X POST \
+"https://api.openshift.com/api/assisted-install/v2/infra-envs" \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer ${API_TOKEN}" \
 -d '{
@@ -212,7 +214,9 @@ source ./refresh-token
 
 2. Retrieve credentials.
 ```bash
-curl -s -X GET "https://api.openshift.com/api/assisted-install/v2/clusters/${CLUSTER_ID}/credentials" -H "Authorization: Bearer ${API_TOKEN}" | jq
+curl -s -X GET \
+"https://api.openshift.com/api/assisted-install/v2/clusters/${CLUSTER_ID}/credentials" \
+-H "Authorization: Bearer ${API_TOKEN}" | jq
 ```
 
 #### 2.1.2 Save credentials.
@@ -239,24 +243,26 @@ podman run -it --pull always -v ${PWD}:/mas9:Z --name ibmmas quay.io/ibmmas/cli:
 ```bash
 cd /mas9
 ```
+
+8. Copy/paste this single command.
 ```bash
 cp /mascli/ansible-devops/common_vars/default_storage_classes.yml /mascli/ansible-devops/common_vars/default_storage_classes.yml.bak && mv default_storage_classes.yml /mascli/ansible-devops/common_vars/default_storage_classes.yml
 ```
 
 ### 2.3 Command line login to OpenShift
 
-8. Copy/paste the `oc login ...` string from your passwords.txt file to login to your OpenShift from inside the MASCLI container.
+9. Copy/paste the `oc login ...` string from your passwords.txt file to login to your OpenShift from inside the MASCLI container.
 
 ### 2.4 LVM Storage
 
-9. Install LVM operator for OpenShift
+10. Install LVM operator for OpenShift
 ```bash
 ./install_lvm_storage.sh
 ```
 
 ### 2.5 Registry (LVM)
 
-10. Install registry server.
+11. Install registry server.
 ```bash
 ./install_lvm_registry.sh
 ```
